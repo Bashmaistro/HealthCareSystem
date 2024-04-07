@@ -5,8 +5,7 @@ USE medify
 -- Role Management
 CREATE TABLE Role (
     rid INT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    
+    name VARCHAR(50) NOT NULL,  
 );
 
 
@@ -47,8 +46,6 @@ CREATE TABLE HealthRecords (
 CREATE TABLE Doctors (
     did INT PRIMARY KEY,
     uid INT,
-    Name VARCHAR(50) NOT NULL,
-    Surname VARCHAR(50) NOT NULL,
     Degree ENUM('Prof.Dr','Op.Dr.','Exp.Dr.','Fzt.','Dr.','Ast.Dr.')
     Specialty VARCHAR(100) NOT NULL,
     FOREIGN KEY (uid) REFERENCES Users(uid)
