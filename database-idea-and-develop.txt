@@ -1,3 +1,5 @@
+CREATE DATABASE medify
+USE medify
 -- User Management
 CREATE TABLE Users (
     uid INT PRIMARY KEY,
