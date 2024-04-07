@@ -1,33 +1,44 @@
 CREATE DATABASE medify
 USE medify
+
+
+-- Role Management
+CREATE TABLE Role (
+    rid INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    
+);
+
+
 -- User Management
 CREATE TABLE Users (
     uid INT PRIMARY KEY,
-    Name VARCHAR(50) NOT NULL,
-    Surname VARCHAR(50) NOT NULL,
-    Password VARCHAR(50) NOT NULL,
-    Role ENUM('none','patient', 'doctor', 'admin') NOT NULL
+    roleid INT,
+    name VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    email
+    dateOfBirth DATE NOT NULL,
+    contactNumber VARCHAR(15) NOT NULL,
+    address VARCHAR(255),
+    FOREIGN KEY (roleid) REFERENCES Role(rid)
 );
 
 -- Patient Management
 CREATE TABLE Patients (
     pid INT PRIMARY KEY,
     uid INT,
-    Name VARCHAR(50) NOT NULL,
-    Surname VARCHAR(50) NOT NULL,
-    DateOfBirth DATE NOT NULL,
     Gender ENUM('Male', 'Female', 'Other') NOT NULL,
     ContactNumber VARCHAR(15) NOT NULL,
-    Address VARCHAR(255) NOT NULL,
     FOREIGN KEY (uid) REFERENCES Users(uid)
 );
 
 CREATE TABLE HealthRecords (
     RecordID INT PRIMARY KEY,
     pid INT,
+    did INT,    
     RecordDate DATE NOT NULL,
     Prescription VARCHAR(255),
-    did INT,
     FOREIGN KEY (pid) REFERENCES Patients(pid),
     FOREIGN KEY (did) REFERENCES Doctors(did)
 );
@@ -40,8 +51,6 @@ CREATE TABLE Doctors (
     Surname VARCHAR(50) NOT NULL,
     Degree ENUM('Prof.Dr','Op.Dr.','Exp.Dr.','Fzt.','Dr.','Ast.Dr.')
     Specialty VARCHAR(100) NOT NULL,
-    ContactNumber VARCHAR(15) NOT NULL,
-    Address VARCHAR(255) NOT NULL,
     FOREIGN KEY (uid) REFERENCES Users(uid)
 );
 
