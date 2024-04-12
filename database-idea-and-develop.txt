@@ -46,7 +46,7 @@ CREATE TABLE HealthRecords (
 CREATE TABLE Doctors (
     did INT PRIMARY KEY,
     uid INT,
-    Degree ENUM('Prof.Dr','Op.Dr.','Exp.Dr.','Fzt.','Dr.','Ast.Dr.')
+    Degree ENUM('Prof_Dr','Op_Dr','Exp_Dr','Fzt','Dr','Ast_Dr.') --//In database change . with _ cuz java doesn't support . in enum--
     Specialty VARCHAR(100) NOT NULL,
     FOREIGN KEY (uid) REFERENCES Users(uid)
 );
