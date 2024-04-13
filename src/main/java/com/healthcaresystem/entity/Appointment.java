@@ -27,4 +27,55 @@ public class Appointment {
 
     @Column(name = "Status",nullable = false)
     private Integer status;
+
+    public Appointment() {
+    }
+
+    public Appointment(Long aid, Doctors doctor, Patient patient, Date appointmentDate, Integer status) {
+        this.aid = aid;
+        this.doctor = doctor;
+        this.patient = patient;
+        this.appointmentDate = appointmentDate;
+        this.status = status;
+    }
+
+    public Long getAid() {
+        return aid;
+    }
+
+    public void setAid(Long aid) {
+        this.aid = aid;
+    }
+
+    public Doctors getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctors doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Date getAppointmentDate() {
+        return appointmentDate;
+    }
+
+    public void setAppointmentDate(Date appointmentDate) {
+        this.appointmentDate = appointmentDate;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }
