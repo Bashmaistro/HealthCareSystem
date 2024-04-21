@@ -15,6 +15,7 @@ CREATE TABLE Users (
     roleid INT,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
+    Gender ENUM('Male', 'Female', 'Other') NOT NULL,
     password VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     dateOfBirth DATE NOT NULL,
@@ -27,8 +28,7 @@ CREATE TABLE Users (
 CREATE TABLE Patients (
     pid INT PRIMARY KEY,
     uid INT,
-    Gender ENUM('Male', 'Female', 'Other') NOT NULL,
-    ContactNumber VARCHAR(15) NOT NULL,
+    specialCase VARCHAR(255),
     FOREIGN KEY (uid) REFERENCES Users(uid)
 );
 
@@ -57,7 +57,7 @@ CREATE TABLE Appointments (
     did INT,
     pid INT,
     AppointmentDate DATETIME NOT NULL,
-    Status ENUM('scheduled', 'cancelled') DEFAULT 'scheduled',
+    Status ENUM('scheduled', 'cancelled', 'completed') DEFAULT 'scheduled',
     FOREIGN KEY (did) REFERENCES Doctors(did),
     FOREIGN KEY (pid) REFERENCES Patients(pid)
 );
