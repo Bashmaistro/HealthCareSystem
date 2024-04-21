@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TestController {
     @GetMapping
-    String getPeople(Model model){
-        return "people";
+    String getMedify(Model model){
+        model.addAttribute("title","Medify");
+        return "index";
     }
 }
