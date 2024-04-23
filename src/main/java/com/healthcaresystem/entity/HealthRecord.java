@@ -21,10 +21,10 @@ public class HealthRecord {
     @JoinColumn(name = "pid", nullable = false)
     private Patient patient;
 
-    @Column(name = "record_date", nullable = false)
+    @Column(name = "RecordDate", nullable = false)
     private Date recordDate;
 
-    @Column(nullable = false)
+    @Column(name="Prescription", nullable = false)
     private String prescription;
 
 

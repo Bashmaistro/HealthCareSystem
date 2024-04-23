@@ -1,6 +1,7 @@
 package com.healthcaresystem.entity;
 
 
+import com.healthcaresystem.enumarated.Gender;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -30,6 +31,25 @@ public class User {
 
     @Column(name = "email" ,nullable = false)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Gender",nullable = false)
+    private Gender gender;
+
+    @Column(name = "dateOfBirth" ,nullable = false)
+    private Date dateOfBirth;
+
+    @Column(name = "contactNumber" ,nullable = false)
+    private long contactNumber;
+
+    @Column(name = "address" ,nullable = false)
+    private String address;
+
+    @OneToOne(mappedBy = "user")
+    private Patient patient;
+
+    @OneToOne(mappedBy = "user")
+    private Doctors doctors;
 
     public Long getUid() {
         return uid;
@@ -87,11 +107,12 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getContactNumber() {
+    public Long getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
+    public void setContactNumber(Long
+                                         contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -119,28 +140,16 @@ public class User {
         this.doctors = doctors;
     }
 
-    @Column(name = "dateOfBirth" ,nullable = false)
-    private Date dateOfBirth;
 
-    @Column(name = "contactNumber" ,nullable = false)
-    private String contactNumber;
 
-    @Column(name = "address" ,nullable = false)
-    private String address;
-
-    @OneToOne(mappedBy = "user")
-    private Patient patient;
-
-    @OneToOne(mappedBy = "user")
-    private Doctors doctors;
-
-    public User(Long uid, Role role, String name, String surname, String password, String email, Date dateOfBirth, String contactNumber, String address, Patient patient, Doctors doctors) {
+    public User(Long uid, Role role, String name, String surname, String password, String email, Gender gender, Date dateOfBirth, Long contactNumber, String address, Patient patient, Doctors doctors) {
         this.uid = uid;
         this.role = role;
         this.name = name;
         this.surname = surname;
         this.password = password;
         this.email = email;
+        this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.contactNumber = contactNumber;
         this.address = address;
@@ -149,5 +158,13 @@ public class User {
     }
 
     public User() {
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

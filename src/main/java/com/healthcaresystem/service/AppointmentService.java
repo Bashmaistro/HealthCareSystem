@@ -1,6 +1,7 @@
 package com.healthcaresystem.service;
 
 import com.healthcaresystem.entity.Appointment;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

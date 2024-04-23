@@ -2,6 +2,7 @@ package com.healthcaresystem.service;
 
 import com.healthcaresystem.entity.Appointment;
 import com.healthcaresystem.entity.HealthRecord;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

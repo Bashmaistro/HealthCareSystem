@@ -4,10 +4,12 @@ import com.healthcaresystem.entity.Appointment;
 import com.healthcaresystem.repository.AppointmentRepository;
 import com.healthcaresystem.service.AppointmentService;
 import org.springframework.aop.target.AbstractPoolingTargetSource;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AppointmentServiceImp implements AppointmentService {
 
    private AppointmentRepository appointmentRepository;

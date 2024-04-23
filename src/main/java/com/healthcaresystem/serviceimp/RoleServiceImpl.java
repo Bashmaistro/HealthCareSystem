@@ -3,10 +3,11 @@ package com.healthcaresystem.serviceimp;
 import com.healthcaresystem.entity.Role;
 import com.healthcaresystem.repository.RoleRepository;
 import com.healthcaresystem.service.RoleService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class RoleServiceImpl implements RoleService {
 
     private RoleRepository roleRepository;

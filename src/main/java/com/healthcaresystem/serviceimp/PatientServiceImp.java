@@ -3,10 +3,11 @@ package com.healthcaresystem.serviceimp;
 import com.healthcaresystem.entity.Patient;
 import com.healthcaresystem.repository.PatientRepository;
 import com.healthcaresystem.service.PatientService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class PatientServiceImp implements PatientService {
 
 

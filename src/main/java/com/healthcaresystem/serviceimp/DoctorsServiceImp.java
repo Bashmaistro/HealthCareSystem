@@ -2,11 +2,12 @@ package com.healthcaresystem.serviceimp;
 
 import com.healthcaresystem.entity.Doctors;
 import com.healthcaresystem.repository.DoctorsRepository;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class DoctorsServiceImp implements com.healthcaresystem.service.DoctorsService {
 
     private DoctorsRepository doctorsRepository;

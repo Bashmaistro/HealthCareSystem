@@ -1,52 +1,35 @@
 package com.healthcaresystem.serviceimp;
 
 import com.healthcaresystem.entity.Doctors;
+import com.healthcaresystem.entity.HealthRecord;
 import com.healthcaresystem.repository.DoctorsRepository;
 import com.healthcaresystem.service.DoctorsService;
+import com.healthcaresystem.service.HealthRecordService;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 import java.util.Optional;
+@Service
+public class HealthRecordServiceImp implements HealthRecordService {
 
-public class HealthRecordServiceImp implements DoctorsService {
-
-    private DoctorsRepository doctorsRepository;
-
-    public HealthRecordServiceImp(DoctorsRepository doctorsRepository) {
-        this.doctorsRepository = doctorsRepository;
+    @Override
+    public List<HealthRecord> findAll() {
+        return null;
     }
 
     @Override
-    public List<Doctors> findAll() {
-        return doctorsRepository.findAll();
+    public HealthRecord findById(int RecordID) {
+        return null;
     }
 
     @Override
-    public Doctors findById(int did) {
-
-        Optional<Doctors> result = doctorsRepository.findById(did);
-        Doctors theDoctors = null;
-
-        if (result.isPresent()){
-            theDoctors = result.get();
-
-        }else {
-            throw new RuntimeException("Did not find employee id - " + did);
-
-        }
-        return theDoctors;
-
+    public HealthRecord save(HealthRecord theHealthRecord) {
+        return null;
     }
 
     @Override
-    public Doctors save(Doctors theDoctors) {
-        return doctorsRepository.save(theDoctors);
-    }
-
-    @Override
-    public void deleteById(int did) {
-
-        doctorsRepository.deleteById(did);
+    public void deleteById(int RecordID) {
 
     }
 }

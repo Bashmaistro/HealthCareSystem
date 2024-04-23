@@ -3,10 +3,11 @@ package com.healthcaresystem.serviceimp;
 import com.healthcaresystem.entity.User;
 import com.healthcaresystem.repository.UserRepository;
 import com.healthcaresystem.service.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class UserServiceImp implements UserService {
 
     private UserRepository userRepository;
@@ -34,6 +35,12 @@ public class UserServiceImp implements UserService {
         }
         return theUser;
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 
     @Override
     public User save(User theUser) {

@@ -35,21 +35,20 @@ public class Doctors {
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
 
-    @OneToMany(mappedBy = "doctor")
-    private List<Patient> patients;
+
 
 
     public Doctors() {
     }
 
-    public Doctors(Long did, User user, Degree degree, String specialty, List<HealthRecord> healthRecords, List<Appointment> appointments, List<Patient> patients) {
+    public Doctors(Long did, User user, Degree degree, String specialty, List<HealthRecord> healthRecords, List<Appointment> appointments) {
         this.did = did;
         this.user = user;
         this.degree = degree;
         Specialty = specialty;
         this.healthRecords = healthRecords;
         this.appointments = appointments;
-        this.patients = patients;
+
     }
 
     public Long getDid() {
@@ -100,11 +99,5 @@ public class Doctors {
         this.appointments = appointments;
     }
 
-    public List<Patient> getPatients() {
-        return patients;
-    }
 
-    public void setPatients(List<Patient> patients) {
-        this.patients = patients;
-    }
 }
