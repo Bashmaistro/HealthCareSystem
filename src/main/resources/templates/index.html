@@ -72,6 +72,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="contact.html">Contact Us</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link box" href="/login">login</a>
+              </li>
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
@@ -180,7 +183,7 @@
           <div class="col-md-3">
             <div class="box ">
               <div class="img-box">
-                <img src="../static/images/s1.png" alt="">
+                <img th:src="@{/images/s1.png}" src="../static/images/s1.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -195,7 +198,7 @@
           <div class="col-md-3">
             <div class="box ">
               <div class="img-box">
-                <img  src="../static/images/s2.png" alt="">
+                <img th:src="@{/images/s2.png}" src="../static/images/s2.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -210,7 +213,7 @@
           <div class="col-md-3">
             <div class="box ">
               <div class="img-box">
-                <img src="../static/images/s3.png" alt="">
+                <img th:src="@{/images/s3.png}" src="../static/images/s3.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -225,7 +228,7 @@
           <div class="col-md-3">
             <div class="box ">
               <div class="img-box">
-                <img src="../static/images/s4.png" alt="">
+                <img th:src="@{/images/s4.png}" src="../static/images/s4.png" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -256,7 +259,7 @@
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
-            <img src="../static/images/about-img.jpg" alt="">
+            <img th:src="@{/images/about-img.jpg}" src="../static/images/about-img.jpg" alt="">
           </div>
         </div>
         <div class="col-md-6">
@@ -299,7 +302,7 @@
         <div class="col-sm-6 col-lg-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <img src="../static/images/d1.jpg" alt="">
+              <img th:src="@{/images/d1.jpg}"  src="../static/images/d1.jpg" alt="">
             </div>
             <div class="detail-box">
               <div class="social_box">
@@ -328,7 +331,7 @@
         <div class="col-sm-6 col-lg-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <img src="../static/images/d2.jpg" alt="">
+              <img th:src="@{/images/d2.jpg}" src="../static/images/d2.jpg" alt="">
             </div>
             <div class="detail-box">
               <div class="social_box">
@@ -357,7 +360,7 @@
         <div class="col-sm-6 col-lg-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <img src="../static/images/d3.jpg" alt="">
+              <img th:src="@{/images/d3.jpg}" src="../static/images/d3.jpg" alt="">
             </div>
             <div class="detail-box">
               <div class="social_box">
@@ -394,59 +397,10 @@
 
   <!-- end doctor section -->
 
-  <!-- contact section -->
-  <section class="contact_section layout_padding">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Get In Touch
-        </h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form_container contact-form">
-            <form action="">
-              <div class="form-row">
-                <div class="col-lg-6">
-                  <div>
-                    <input type="text" placeholder="Your Name" />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div>
-                    <input type="text" placeholder="Phone Number" />
-                  </div>
-                </div>
-              </div>
-              <div>
-                <input type="email" placeholder="Email" />
-              </div>
-              <div>
-                <input type="text" class="message-box" placeholder="Message" />
-              </div>
-              <div class="btn_box">
-                <button>
-                  SEND
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="map_container">
-            <div class="map">
-              <div id="googleMap"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end contact section -->
 
   <!-- client section -->
 
-  <section class="client_section layout_padding-bottom">
+  <section class="client_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center ">
         <h2>
@@ -460,7 +414,7 @@
               <div class="col-md-11 col-lg-10 mx-auto">
                 <div class="box">
                   <div class="img-box">
-                    <img src="../static/images/client.jpg" alt="" />
+                    <img th:src="@{/images/client.jpg}" src="../static/images/client.jpg" alt="" />
                   </div>
                   <div class="detail-box">
                     <div class="name">
@@ -482,7 +436,7 @@
               <div class="col-md-11 col-lg-10 mx-auto">
                 <div class="box">
                   <div class="img-box">
-                    <img src="../static/images/client.jpg" alt="" />
+                    <img th:src="@{/images/client.jpg}" src="../static/images/client.jpg" alt="" />
                   </div>
                   <div class="detail-box">
                     <div class="name">
@@ -504,7 +458,7 @@
               <div class="col-md-11 col-lg-10 mx-auto">
                 <div class="box">
                   <div class="img-box">
-                    <img src="../static/images/client.jpg" alt="" />
+                    <img th:src="@{/images/client.jpg}" src="../static/images/client.jpg" alt="" />
                   </div>
                   <div class="detail-box">
                     <div class="name">
@@ -633,7 +587,7 @@
         <p>
           &copy; <span id="displayYear"></span> All Rights Reserved By
           <a href="https://html.design/">Free Html Templates<br><br></a>
-            &copy; <span id="displayYear"></span> Distributed By
+            &copy; <span id=""></span> Distributed By
             <a href="https://themewagon.com/">ThemeWagon</a>
         </p>
        
@@ -643,17 +597,17 @@
   <!-- footer section -->
 
   <!-- jQery -->
-  <script type="text/javascript" src="../static/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
   </script>
   <!-- bootstrap js -->
-  <script type="text/javascript" src="../static/js/bootstrap.js"></script>
+  <script type="text/javascript" th:src="@{/js/bootstrap.js}" src="../static/js/bootstrap.js"></script>
   <!-- owl slider -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
   </script>
   <!-- custom js -->
-  <script type="text/javascript" src="../static/js/custom.js"></script>
+  <script type="text/javascript" th:src="@{/js/custom.js}" src="../static/js/custom.js"></script>
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
