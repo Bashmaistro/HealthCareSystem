@@ -3,6 +3,7 @@ package com.healthcaresystem.serviceimp;
 import com.healthcaresystem.entity.Doctors;
 import com.healthcaresystem.entity.HealthRecord;
 import com.healthcaresystem.repository.DoctorsRepository;
+import com.healthcaresystem.repository.HealthRecordRepository;
 import com.healthcaresystem.service.DoctorsService;
 import com.healthcaresystem.service.HealthRecordService;
 import org.springframework.stereotype.Service;
@@ -13,23 +14,40 @@ import java.util.Optional;
 @Service
 public class HealthRecordServiceImp implements HealthRecordService {
 
+
+    private HealthRecordRepository healthRecordRepository;
+
     @Override
     public List<HealthRecord> findAll() {
-        return null;
+        return healthRecordRepository.findAll();
     }
 
     @Override
-    public HealthRecord findById(int RecordID) {
-        return null;
+    public HealthRecord findById(int RecordID)
+
+    {
+        Optional<HealthRecord> result = healthRecordRepository.findById(RecordID);
+        HealthRecord theHealthRecord = null;
+
+        if (result.isPresent()){
+            theHealthRecord = result.get();
+
+        }else {
+            throw new RuntimeException("Did not find employee id - " + RecordID);
+
+        }
+
+        return theHealthRecord;
     }
 
     @Override
     public HealthRecord save(HealthRecord theHealthRecord) {
-        return null;
+        return healthRecordRepository.save(theHealthRecord);
     }
 
     @Override
     public void deleteById(int RecordID) {
+        healthRecordRepository.deleteById(RecordID);
 
     }
 }

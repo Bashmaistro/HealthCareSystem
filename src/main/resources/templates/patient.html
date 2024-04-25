@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Bilgileri ve Sağlık Kaydı</title>
+    <style>
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px;
+            width: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .health-record {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-<p>
-  BEN BIR HASTA KOLEYIM
-</p>
+<div class="container" th:object="${patient}" th:method="get">
+    <h1>Kullanıcı Bilgileri</h1>
+    <img src="/images/emptyUser.png" alt="Kullanıcı Resmi" width="150">
+    <p th:text=" 'Name and Surname:' + ' ' + *{patient.getUser().getName() + ' ' + patient.getUser().getSurname()} "><strong>Adı Soyadı:</strong> </p>
+    <p th:text=" 'Gender:' + ' ' + *{patient.getUser().getGender()}"><strong>Adres:</strong> </p>
+    <p th:text=" 'Date of Birth:' + ' ' + *{patient.getUser().getDateOfBirth()}"><strong>Doğum Tarihi:</strong></p>
+    <p th:text=" 'Adress:' + ' ' + *{patient.getUser().getAddress()}"><strong>Adres:</strong> </p>
+    <p th:text=" 'Contact Number' + ' ' + *{patient.getUser().getContactNumber()}"><strong>Contact Number:</strong></p>
+</div>
 
+<div class="health-record">
+    <h2>Sağlık Kaydı</h2>
+    <table>
+        <thead>
+        <tr >
+            <th>Doctor's Name</th>
+            <th>Prescription</th>
+            <th>Record Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tempH : ${patientHealth}">
+            <td th:text="${tempH.getDoctor().getUser().getName() + ' ' + tempH.getDoctor().getUser().getSurname()}"></td>
+            <td th:text="${tempH.getPrescription()}"></td>
+            <td th:text="${tempH.getRecordDate()}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

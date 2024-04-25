@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class TestController {
@@ -42,7 +43,7 @@ public class TestController {
 
     }
 
-    @PostMapping("/processUser")
+    @RequestMapping("/processUser")
     public String processUser(@ModelAttribute("user")
                               User theUser,
                               Model model){
@@ -60,6 +61,9 @@ public class TestController {
             if (existingDoctor != null){
                 return "doctors";
             }if (existingPatient != null){
+
+                model.addAttribute("patient", existingUser );
+                model.addAttribute("patientHealth" , existingUser.getPatient().getHealthRecords());
                 return "patient";
             }else{
 
