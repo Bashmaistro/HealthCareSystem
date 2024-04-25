@@ -18,8 +18,8 @@ CREATE TABLE Users (
     Gender ENUM('Male', 'Female', 'Other') NOT NULL,
     password VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    dateOfBirth DATE NOT NULL,
-    contactNumber VARCHAR(15) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    contact_number VARCHAR(15) NOT NULL,
     address VARCHAR(255),
     FOREIGN KEY (roleid) REFERENCES Role(rid)
 );
