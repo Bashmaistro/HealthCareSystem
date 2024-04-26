@@ -16,4 +16,6 @@ public interface DoctorsService {
     Doctors save(Doctors theDoctors);
 
     void deleteById(int did);
+
+    List<Doctors> findBySpecialty(String Specialty);
 }

@@ -51,4 +51,9 @@ public class DoctorsServiceImp implements com.healthcaresystem.service.DoctorsSe
 
         doctorsRepository.deleteById(did);
     }
+
+    @Override
+    public List<Doctors> findBySpecialty(String Specialty) {
+        return doctorsRepository.findBySpecialty(Specialty);
+    }
 }

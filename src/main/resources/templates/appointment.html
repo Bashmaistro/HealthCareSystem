@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Randevu Formu</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2>Randevu Formu</h2>
+
+  <form action="#" th:action="@{/submit}" th:object="${appointment}" method="post">
+
+    <!-- Tarih Seçimi -->
+    <div class="form-group">
+      <label for="tarih">Date:</label>
+      <input type="date" class="form-control" id="tarih" th:field="*{appointmentDate}">
+    </div>
+
+    <!-- Bölüm Seçimi -->
+    <div class="form-group">
+      <label >Specialties:</label>
+      <select id="mainSelect" class="form-control"   onchange="populateSubSelect()" >
+        <option   th:each="temp : ${specialties}" th:text="${temp}" th:value="${temp}"></option>
+
+        <!-- Diğer bölümler -->
+      </select>
+    </div>
+
+    <!-- Doktor Seçimi -->
+    <div class="form-group">
+      <label >Doctor:</label>
+      <select id="subSelect" >
+        <!-- Sub-options will be populated dynamically -->
+      </select>
+    </div>
+
+    <!-- Submit Butonu -->
+    <button type="submit" class="btn btn-primary">Randevu Al</button>
+
+  </form>
+</div>
+
+<!-- jQuery ve Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script th:inline="javascript">
+  function populateSubSelect() {
+    var selectedMainValue = $('#mainSelect').val();
+
+    // Make an Ajax request to get sub-options based on the selected main option
+    $.get('/getDoctors/' + selectedMainValue, function (data) {
+      // Clear current sub-select options
+      $('#subSelect').empty();
+
+      // Populate sub-select dynamically
+      data.forEach(function(item) {
+        var option = $('<option></option>').attr('value', item).text(item);
+        $('#subSelect').append(option);
+      });
+    });
+  }
+</script>
+
+
+</body>
+</html>
