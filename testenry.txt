@@ -8,11 +8,11 @@ INSERT INTO Role (rid, name) VALUES
 (3, 'Patient');
 
 -- Admin User
-INSERT INTO Users (uid, roleid, name, surname, Gender, password, email, dateOfBirth, contactNumber, address) VALUES
+INSERT INTO Users (uid, roleid, name, surname, Gender, password, email, date_of_birth, contact_number, address) VALUES
 (1, 1, 'Admin', 'User', 'Other', 'admin123', 'admin@medify.com', '1970-01-01', '5555555555', '1 Admin St');
 
 -- Doctor Users
-INSERT INTO Users (uid, roleid, name, surname, Gender, password, email, dateOfBirth, contactNumber, address) VALUES
+INSERT INTO Users (uid, roleid, name, surname, Gender, password, email, date_of_birth, contact_number, address) VALUES
 (2, 2, 'John', 'Doe', 'Male', 'doctor123', 'johndoe@hospital.com', '1980-01-01', '1234567890', '123 Main St'),
 (3, 2, 'Jane', 'Smith', 'Female', 'securepassword', 'janesmith@hospital.com', '1985-07-14', '9876543210', '456 Elm St'),
 (4, 2, 'David', 'Williams', 'Male', 'doctor1234', 'davidwilliams@hospital.com', '1982-09-18', '2134567890', '23 Maple St'),
@@ -20,7 +20,7 @@ INSERT INTO Users (uid, roleid, name, surname, Gender, password, email, dateOfBi
 (6, 2, 'Jennifer', 'Clark', 'Female', 'doctor12345', 'jenniferclark@hospital.com', 1983-08-29, '7654321678', '78 Poplar Way');
 
 -- Patient Users
-INSERT INTO Users (uid, roleid, name, surname, Gender, password, email, dateOfBirth, contactNumber, address) VALUES
+INSERT INTO Users (uid, roleid, name, surname, Gender, password, email, date_of_birth, contact_number, address) VALUES
 (7, 3, 'Michael', 'Lee', 'Male', 'mysecret', 'michaellee@patient.com', '1990-03-22', '0987654321', '789 Oak Ave'),
 (8, 3, 'Alice', 'Johnson', 'Female', 'strongpass', 'alicejohnson@patient.com', '1975-12-05', '1098765432', '10 Pine Blvd'),
 (9, 3, 'Emily', 'Brown', 'Female', 'patientsecure', 'emilybrown@patient.com', '1995-06-21', '3214567890', '34 Cedar Lane'),

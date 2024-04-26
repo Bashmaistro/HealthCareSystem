@@ -8,27 +8,26 @@ CREATE TABLE Role (
     name VARCHAR(50) NOT NULL
 );
 
-
 -- User Management
 CREATE TABLE Users (
     uid INT PRIMARY KEY,
-    roleid INT,
+    role_id INT,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
-    Gender ENUM('Male', 'Female', 'Other') NOT NULL,
+    gender ENUM('Male', 'Female', 'Other') NOT NULL,
     password VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    dateOfBirth DATE NOT NULL,
-    contactNumber VARCHAR(15) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    contact_number VARCHAR(15) NOT NULL,
     address VARCHAR(255),
-    FOREIGN KEY (roleid) REFERENCES Role(rid)
+    FOREIGN KEY (role_id) REFERENCES Role(rid)
 );
 
 -- Patient Management
 CREATE TABLE Patients (
     pid INT PRIMARY KEY,
     uid INT,
-    specialCase VARCHAR(255),
+    special_case VARCHAR(255),
     FOREIGN KEY (uid) REFERENCES Users(uid)
 );
 
@@ -36,17 +35,17 @@ CREATE TABLE Patients (
 CREATE TABLE Doctors (
     did INT PRIMARY KEY,
     uid INT,
-    Degree ENUM('Prof_Dr','Op_Dr','Exp_Dr','Fzt','Dr','Ast_Dr.') NOT NULL,
-    Specialty VARCHAR(100) NOT NULL,
+    degree ENUM('Prof_Dr','Op_Dr','Exp_Dr','Fzt','Dr','Ast_Dr.') NOT NULL,
+    specialty VARCHAR(100) NOT NULL,
     FOREIGN KEY (uid) REFERENCES Users(uid)
 );
 
 CREATE TABLE HealthRecords (
-    RecordID INT PRIMARY KEY,
+    record_id INT PRIMARY KEY,
     pid INT,
     did INT,    
-    RecordDate DATE NOT NULL,
-    Prescription VARCHAR(255),
+    record_date DATE NOT NULL,
+    prescription VARCHAR(255),
     FOREIGN KEY (pid) REFERENCES Patients(pid),
     FOREIGN KEY (did) REFERENCES Doctors(did)
 );
@@ -56,8 +55,8 @@ CREATE TABLE Appointments (
     aid INT PRIMARY KEY,
     did INT,
     pid INT,
-    AppointmentDate DATETIME NOT NULL,
-    Status ENUM('scheduled', 'cancelled', 'completed') DEFAULT 'scheduled',
+    appointment_date DATETIME NOT NULL,
+    status ENUM('scheduled', 'cancelled', 'completed') DEFAULT 'scheduled',
     FOREIGN KEY (did) REFERENCES Doctors(did),
     FOREIGN KEY (pid) REFERENCES Patients(pid)
 );
