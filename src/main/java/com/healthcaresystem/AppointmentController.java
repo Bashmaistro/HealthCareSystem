@@ -62,13 +62,7 @@ public class AppointmentController {
 
 
 
-    @GetMapping("/getDoctors")
-    public List<Doctors> getDoctors(){
 
-        return doctorsService.findBySpecialty("Cardiology");
-
-
-    }
 }
 
 

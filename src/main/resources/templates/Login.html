@@ -6,6 +6,13 @@
   <title>Login Page</title>
   <!-- Bootstrap CSS -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Özel CSS */
+    .sign-up-btn {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+  </style>
 </head>
 <body>
 
@@ -29,6 +36,11 @@
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </div>
+          </form>
+          <form action="#" th:action="@{/signUp}" method="get">
+            <div class="form-group">
+              <button type="submit" class="btn btn-success btn-block sign-up-btn">Sign Up</button>
             </div>
           </form>
           <div th:if="${error}" class="alert alert-danger">

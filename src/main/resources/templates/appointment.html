@@ -53,7 +53,7 @@
     var selectedMainValue = $('#mainSelect').val();
 
     // Make an Ajax request to get sub-options based on the selected main option
-    $.get('/getDoctors/' + selectedMainValue, function (data) {
+    $.get('api/getDoctors/' + selectedMainValue, function (data) {
       // Clear current sub-select options
       $('#subSelect').empty();
 
