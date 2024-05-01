@@ -75,7 +75,7 @@ public class SignUpController {
 
 
         User tempUser = userService.findByEmail(user.getEmail());
-       
+
 
         if (tempUser != null){
             model.addAttribute("error", "This Mail is being used");
@@ -94,8 +94,8 @@ public class SignUpController {
         session.setAttribute("pUser" , user);
 
         if (user.getEmail() != null) {
-            //emailSenderService.sendMail(user.getEmail(), "Email Verification", String.valueOf(randomNumber));
-            System.out.println("emaıl gonderdı");
+            emailSenderService.sendMail(user.getEmail(), "Email Verification", String.valueOf(randomNumber));
+            System.out.println("Email-Sended");
             return "email_check";
         } else {
             model.addAttribute("error", "Failed to send email: Email address is null");
