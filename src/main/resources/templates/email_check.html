@@ -25,16 +25,14 @@
           <h4 class="mb-0">Email Check</h4>
         </div>
         <div class="card-body">
-          <form>
-            <form action="#" th:action="@{/verification}" th:object="${pUser}"  method="post">
+          <form action="#" th:action="@{/verification}" method="post">
             <div class="form-group">
               <label for="verificationCode">Enter the 6-digit code:</label>
-              <input  type="hidden" id="check" th:value="${check}" >
-              <input  type="text" class="form-control" id="verificationCode" placeholder="Enter 6-digit code">
+              <input type="text" class="form-control" id="verificationCode" name="verificationCode" placeholder="Enter 6-digit code">
             </div>
-              <div th:if="${error}" class="alert alert-danger">
-                <p th:text="${error}"></p>
-              </div>
+            <div th:if="${error}" class="alert alert-danger">
+              <p th:text="${error}"></p>
+            </div>
             <button type="submit" class="btn btn-success btn-block">Submit</button>
           </form>
         </div>

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -47,15 +49,15 @@ public class SignUpController {
         genders.add(Gender.Female);
         genders.add(Gender.Other);
 
+        System.out.println(user.getUid());
+
+
+
         model.addAttribute("genders" ,genders);
 
-
-        long i = 3;
-        Role Patient = new Role(i,"Patient");
-
-        user.setRole(Patient);
-
         model.addAttribute("user" , user);
+
+
 
         return "register";
 
@@ -63,11 +65,17 @@ public class SignUpController {
 
     }
 
-    @RequestMapping("/emailCheck")
+    @RequestMapping ("/emailCheck")
     public String emailCheck(@ModelAttribute("user") User user,
-                             Model model){
+                             Model model,
+                             jakarta.servlet.http.HttpSession  session){
+
+
+
+
 
         User tempUser = userService.findByEmail(user.getEmail());
+       
 
         if (tempUser != null){
             model.addAttribute("error", "This Mail is being used");
@@ -80,33 +88,54 @@ public class SignUpController {
         int max = 999999; // En büyük 6 haneli sayı
         int randomNumber = random.nextInt(max - min + 1) + min;
 
-        emailSenderService.sendMail(user.getEmail(),"Email Verification" , String.valueOf(randomNumber));
+        user.setEmailCode(randomNumber);
 
-        model.addAttribute("check" , randomNumber);
-        model.addAttribute("pUser" , user);
 
-        return "email_check";
+        session.setAttribute("pUser" , user);
+
+        if (user.getEmail() != null) {
+            //emailSenderService.sendMail(user.getEmail(), "Email Verification", String.valueOf(randomNumber));
+            System.out.println("emaıl gonderdı");
+            return "email_check";
+        } else {
+            model.addAttribute("error", "Failed to send email: Email address is null");
+            return "register";
+        }
+
+
+
+
 
     }
 
     @RequestMapping("/verification")
     public String verification(@RequestParam("verificationCode") int verificationCode,
-                               @ModelAttribute("user") User user,
-                               @RequestParam("check") int check,
+                               jakarta.servlet.http.HttpSession  session,
                                Model model ){
 
 
+        User pUser = (User) session.getAttribute("pUser");
 
-            if (verificationCode == check){
-                userService.save(user);
+            if (verificationCode == pUser.getEmailCode()){
+
+
                 Patient patient = new Patient();
-                user.setPatient(patient);
-                patientService.save(user.getPatient());
-                return "login";
+
+                //Add patient  Role
+                Role role = roleService.findById(3);
+                pUser.setRole(role);
+
+                userService.save(pUser);
+
+                patient.setUser(userService.findById(Math.toIntExact(pUser.getUid())));
+
+                patientService.save(patient);
+
+                return "Login";
             }else {
                 model.addAttribute("error", "Wrong Code!!!!!!");
-                verificationCode = 0;
-                return "redirect:/emailCheck";
+
+                return "register";
             }
 
 

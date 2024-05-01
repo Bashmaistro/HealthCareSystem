@@ -51,6 +51,10 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Doctors doctors;
 
+
+    @Transient
+    private int emailCode = 0;
+
     public Long getUid() {
         return uid;
     }
@@ -167,4 +171,37 @@ public class User {
     public void setGender(Gender gender) {
         this.gender = gender;
     }
+
+    public int getEmailCode() {
+        return emailCode;
+    }
+
+    public void setEmailCode(int emailCode) {
+        this.emailCode = emailCode;
+    }
+
+      @Override
+      public String toString() {
+          return "User{" +
+                  "email='" + email + '\'' +
+                  // Diğer özellikler buraya eklenebilir
+                  '}';
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
