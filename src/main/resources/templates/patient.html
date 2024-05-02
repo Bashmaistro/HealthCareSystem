@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kullanıcı Bilgileri ve Sağlık Kaydı</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css" href="../static/css/bootstrap.css"/>
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/style.css}" href="../static/css/style.css"  rel="stylesheet" />
+
     <style>
         .container {
             border: 1px solid #ccc;
-            padding: 20px;
-            margin: 20px;
-            width: 50%;
+            padding: 1em;
+            margin: auto!important;
+            width: 90%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -38,39 +42,60 @@
     </style>
 </head>
 <body>
-<div class="container" th:object="${patient}" th:method="get">
-    <h1>Kullanıcı Bilgileri</h1>
-    <img src="/images/emptyUser.png" alt="Kullanıcı Resmi" width="150">
-    <p th:text=" 'Name and Surname:' + ' ' + *{patient.getUser().getName() + ' ' + patient.getUser().getSurname()} "><strong>Adı Soyadı:</strong> </p>
-    <p th:text=" 'Gender:' + ' ' + *{patient.getUser().getGender()}"><strong>Adres:</strong> </p>
-    <p th:text=" 'Date of Birth:' + ' ' + *{patient.getUser().getDateOfBirth()}"><strong>Doğum Tarihi:</strong></p>
-    <p th:text=" 'Adress:' + ' ' + *{patient.getUser().getAddress()}"><strong>Adres:</strong> </p>
-    <p th:text=" 'Contact Number' + ' ' + *{patient.getUser().getContactNumber()}"><strong>Contact Number:</strong></p>
-    <a th:href="@{'/appointment/' + ${patient.getUid()}}" class="btn">Take an Appointment</a>
-</div>
 
-<div class="health-record">
-    <h2>Sağlık Kaydı</h2>
-    <table>
-        <thead>
-        <tr >
-            <th>Doctor's Name</th>
-            <th>Prescription</th>
-            <th>Record Date</th>
+<div class="hero_area">
+    <div class="hero_bg_box">
+        <img th:src="@{/images/hero-bg.png}" src="../static/images/hero-bg.png" alt="">
+    </div>
+    <!-- header section strats -->
+    <header th:insert="user_panel_navbar :: navbar" class="header_section">
+    </header>
+    <!-- end header section -->
+
+        <div class="card mb-3 container" th:object="${patient}" th:method="get">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="..." class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title border-bottom thick">Your Information</h5>
+                        <p class="card-text"th:text=" 'Name and Surname:' + ' ' + *{patient.getUser().getName() + ' ' + patient.getUser().getSurname()} ">
+                            <strong>Name-Surname:</strong></p>
+                        <p class="card-text" th:text=" 'Gender:' + ' ' + *{patient.getUser().getGender()}">
+                            <strong>Gender:</strong></p>
+                        <p class="card-text" th:text=" 'Date of Birth:' + ' ' + *{patient.getUser().getDateOfBirth()}"><strong>Doğum Tarihi:</strong></p>
+                        <p class="card-text" th:text=" 'Adress:' + ' ' + *{patient.getUser().getAddress()}"><strong>Adres:</strong></p>
+                        <p class="card-text" th:text=" 'Contact Number' + ' ' + *{patient.getUser().getContactNumber()}"><strong>Contact Number:</strong> </p>
+                        <button type="button" class="btn btn-primary btn-lg btn-block"><a th:href="@{'/appointment/' + ${patient.getUid()}}" class="btn">Take an Appointment</a></button>
 
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="tempH : ${patientHealth}">
-            <td th:text="${tempH.getDoctor().getUser().getName() + ' ' + tempH.getDoctor().getUser().getSurname()}"></td>
-            <td th:text="${tempH.getPrescription()}"></td>
-            <td th:text="${tempH.getRecordDate()}"></td>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        </tr>
+    <div class="health-record">
+        <h2>Sağlık Kaydı</h2>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Doctor's Name</th>
+                <th>Prescription</th>
+                <th>Record Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tempH : ${patientHealth}">
+                <td th:text="${tempH.getDoctor().getUser().getName() + ' ' + tempH.getDoctor().getUser().getSurname()}"></td>
+                <td th:text="${tempH.getPrescription()}"></td>
+                <td th:text="${tempH.getRecordDate()}"></td>
 
-        </tbody>
-    </table>
-</div>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
