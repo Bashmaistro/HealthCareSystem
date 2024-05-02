@@ -95,7 +95,7 @@
         }
 
         .input {
-            width: 40px;
+            width: 5em;
             border: none;
             border-bottom: 3px solid rgba(0, 0, 0, 0.5);
             margin: 0 10px;
@@ -114,6 +114,12 @@
             cursor: pointer;
             pointer-events: all;
         }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
         }
     </style>
 
@@ -130,8 +136,7 @@
                 <br/>Thank you for choosing Fusionex GIANT.
             </div>
             <div class="activation__arrow"></div>
-            <div class="activation__message">
-                <div class="container">
+            <div class="activation__message container">
                     <div id="inputs" class="inputs">
                         <input class="input" type="text"
                                inputmode="numeric" maxlength="1"/>
@@ -142,43 +147,7 @@
                         <input class="input" type="text"
                                inputmode="numeric" maxlength="1"/>
                     </div>
-                </div>
-                <script>
-                                    // script.js
-                const inputs = document.getElementById("inputs");
 
-                inputs.addEventListener("input", function (e) {
-                    const target = e.target;
-                    const val = target.value;
-
-                    if (isNaN(val)) {
-                        target.value = "";
-                        return;
-                    }
-
-                    if (val != "") {
-                        const next = target.nextElementSibling;
-                        if (next) {
-                            next.focus();
-                        }
-                    }
-                });
-
-                inputs.addEventListener("keyup", function (e) {
-                    const target = e.target;
-                    const key = e.key.toLowerCase();
-
-                    if (key == "backspace" || key == "delete") {
-                        target.value = "";
-                        const prev = target.previousElementSibling;
-                        if (prev) {
-                            prev.focus();
-                        }
-                        return;
-                    }
-                });
-
-                </script>
             </div>
             <div class="activation__link">
                 <div>
@@ -194,6 +163,42 @@
         </div>
     </div>
 </div>
+<script>
+    // script.js
+const inputs = document.getElementById("inputs");
+
+inputs.addEventListener("input", function (e) {
+const target = e.target;
+const val = target.value;
+
+if (isNaN(val)) {
+target.value = "";
+return;
+}
+
+if (val != "") {
+const next = target.nextElementSibling;
+if (next) {
+next.focus();
+}
+}
+});
+
+inputs.addEventListener("keyup", function (e) {
+const target = e.target;
+const key = e.key.toLowerCase();
+
+if (key == "backspace" || key == "delete") {
+target.value = "";
+const prev = target.previousElementSibling;
+if (prev) {
+prev.focus();
+}
+return;
+}
+});
+
+</script>
 </body>
 </html>
 
