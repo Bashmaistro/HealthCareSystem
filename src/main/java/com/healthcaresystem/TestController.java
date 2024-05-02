@@ -32,6 +32,12 @@ public class TestController {
         return "index";
     }
 
+    @GetMapping("/patient")
+    String getPatient(Model model){
+
+        return "patient";
+    }
+
     @GetMapping("/login")
     public String login(Model theModel){
 
