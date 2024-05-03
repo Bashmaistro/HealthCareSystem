@@ -8,7 +8,8 @@
 }
 
 .input {
-    width: 40px;
+    min-width: 1.5vw!important;
+    max-width: 0.8em;
     border: none;
     border-bottom: 3px solid rgba(0, 0, 0, 0.5);
     margin: 0 10px;
@@ -26,4 +27,6 @@
 .input:nth-child(1) {
     cursor: pointer;
     pointer-events: all;
+}
+.card{
 }
