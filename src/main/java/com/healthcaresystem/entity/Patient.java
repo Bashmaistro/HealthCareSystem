@@ -1,5 +1,7 @@
 package com.healthcaresystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.healthcaresystem.enumarated.Gender;
 import jakarta.persistence.*;
 
@@ -17,9 +19,10 @@ public class Patient {
 
     @OneToOne
     @JoinColumn(name = "uid")
+    @JsonBackReference
     private User user;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient" , fetch = FetchType.EAGER )
     private List<HealthRecord> healthRecords;
 
 

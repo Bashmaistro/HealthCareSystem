@@ -1,4 +1,4 @@
-package com.healthcaresystem;
+package com.healthcaresystem.controller;
 
 import com.healthcaresystem.entity.Patient;
 import com.healthcaresystem.entity.Role;
@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

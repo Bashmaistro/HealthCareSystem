@@ -11,7 +11,7 @@
 <div class="container mt-5">
   <h2>Randevu Formu</h2>
 
-  <form action="#" th:action="@{/submit}" th:object="${appointment}" method="post">
+  <form action="#" th:action="@{/appointment/submit}" th:object="${appointment}" method="post">
 
     <!-- Tarih Seçimi -->
     <div class="form-group">
@@ -22,8 +22,9 @@
     <!-- Bölüm Seçimi -->
     <div class="form-group">
       <label >Specialties:</label>
-      <select id="mainSelect" class="form-control"   onchange="populateSubSelect()" >
+      <select id="mainSelect" class="form-control"  >
         <option   th:each="temp : ${specialties}" th:text="${temp}" th:value="${temp}"></option>
+
 
         <!-- Diğer bölümler -->
       </select>
@@ -31,11 +32,14 @@
 
     <!-- Doktor Seçimi -->
     <div class="form-group">
-      <label >Doctor:</label>
-      <select id="subSelect" >
+      <label>Doctor:</label>
+      <select id="subSelect"  name="doctorId" class="form-control"   >
+
+
         <!-- Sub-options will be populated dynamically -->
       </select>
     </div>
+
 
     <!-- Submit Butonu -->
     <button type="submit" class="btn btn-primary">Randevu Al</button>
@@ -49,22 +53,51 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script th:inline="javascript">
-  function populateSubSelect() {
-    var selectedMainValue = $('#mainSelect').val();
 
-    // Make an Ajax request to get sub-options based on the selected main option
-    $.get('api/getDoctors/' + selectedMainValue, function (data) {
-      // Clear current sub-select options
-      $('#subSelect').empty();
-
-      // Populate sub-select dynamically
-      data.forEach(function(item) {
-        var option = $('<option></option>').attr('value', item).text(item);
-        $('#subSelect').append(option);
-      });
-    });
-  }
 </script>
+
+<script th:inline="javascript">
+   // Birinci select'i seçildiğinde çağrılacak fonksiyon
+    document.getElementById("mainSelect").addEventListener("change", function() {
+    // Seçilen değeri al
+     var selectedValue = this.value;
+
+
+    // Endpoint URL'i oluştur
+    var endpoint = "http://localhost:8080/api/getDoctors/" + selectedValue;
+
+    // GET isteği oluştur
+    fetch(endpoint)
+            .then(response => response.json()) // JSON verisini parse et
+            .then(data => {
+              // İkinci select'i temizle
+              var secondSelect = document.getElementById("subSelect");
+              secondSelect.innerHTML = "";
+
+              const id = document.getElementById("id")
+
+              // Gelen verileri ikinci select'e ekle
+              data.forEach(item => {
+                var option = document.createElement("option");
+                option.value = item.uid;
+               console.log(item.uid)
+                option.textContent = item.name + " " + item.surname;
+                secondSelect.appendChild(option);
+
+              });
+
+
+
+            })
+
+
+            .catch(error => {
+              console.error('Bir hata oluştu:', error);
+            });
+  });
+</script>
+
+
 
 
 </body>

@@ -69,6 +69,9 @@
                         <p class="card-text" th:text=" 'Contact Number' + ' ' + *{patient.getUser().getContactNumber()}"><strong>Contact Number:</strong> </p>
                         <button type="button" class="btn btn-primary btn-lg btn-block"><a th:href="@{'/appointment/' + ${patient.getUid()}}" class="btn btn-success text-light">Take an Appointment</a></button>
 
+                        <div th:if="${success}" class="alert alert-success">
+                             <span th:text="${success}"></span>
+                        </div>
 
                     </div>
                 </div>
@@ -87,7 +90,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="tempH : ${patientHealth}">
+            <tr th:if="${tempH != null}" th:each="tempH : ${patientHealth}">
                 <td th:text="${tempH.getDoctor().getUser().getName() + ' ' + tempH.getDoctor().getUser().getSurname()}"></td>
                 <td th:text="${tempH.getPrescription()}"></td>
                 <td th:text="${tempH.getRecordDate()}"></td>

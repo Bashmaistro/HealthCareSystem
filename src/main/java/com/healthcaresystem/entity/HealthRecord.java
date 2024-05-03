@@ -1,5 +1,6 @@
 package com.healthcaresystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -19,6 +20,7 @@ public class HealthRecord {
 
     @ManyToOne
     @JoinColumn(name = "pid", nullable = false)
+    @JsonManagedReference
     private Patient patient;
 
     @Column(name = "RecordDate", nullable = false)

@@ -1,5 +1,7 @@
 package com.healthcaresystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.healthcaresystem.enumarated.Status;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -16,26 +18,30 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "did", nullable = false)
+    @JsonManagedReference
     private Doctors doctor;
 
     @ManyToOne
     @JoinColumn(name = "pid", nullable = false)
+    @JsonManagedReference
     private Patient patient;
 
     @Column(name = "AppointmentDate", nullable = false)
     private Date appointmentDate;
 
     @Column(name = "Status",nullable = false)
-    private Integer status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     public Appointment() {
     }
 
-    public Appointment(Long aid, Doctors doctor, Patient patient, Date appointmentDate, Integer status) {
+    public Appointment(Long aid, Doctors doctor, Patient patient, Date appointmentDate, Status status) {
         this.aid = aid;
         this.doctor = doctor;
         this.patient = patient;
         this.appointmentDate = appointmentDate;
+
         this.status = status;
     }
 
@@ -71,11 +77,12 @@ public class Appointment {
         this.appointmentDate = appointmentDate;
     }
 
-    public Integer getStatus() {
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

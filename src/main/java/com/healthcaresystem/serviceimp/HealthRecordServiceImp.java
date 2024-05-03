@@ -2,6 +2,7 @@ package com.healthcaresystem.serviceimp;
 
 import com.healthcaresystem.entity.Doctors;
 import com.healthcaresystem.entity.HealthRecord;
+import com.healthcaresystem.entity.Patient;
 import com.healthcaresystem.repository.DoctorsRepository;
 import com.healthcaresystem.repository.HealthRecordRepository;
 import com.healthcaresystem.service.DoctorsService;
@@ -49,5 +50,11 @@ public class HealthRecordServiceImp implements HealthRecordService {
     public void deleteById(int RecordID) {
         healthRecordRepository.deleteById(RecordID);
 
+    }
+
+    @Override
+    public List<HealthRecord> findHealthRecordsByPatient(Patient patient) {
+
+        return findHealthRecordsByPatient(patient);
     }
 }

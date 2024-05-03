@@ -1,6 +1,8 @@
 package com.healthcaresystem.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.healthcaresystem.enumarated.Gender;
 import jakarta.persistence.*;
 
@@ -48,7 +50,8 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Patient patient;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user" ,fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Doctors doctors;
 
 

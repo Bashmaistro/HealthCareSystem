@@ -1,4 +1,4 @@
-package com.healthcaresystem;
+package com.healthcaresystem.controller;
 
 import com.healthcaresystem.entity.Doctors;
 import com.healthcaresystem.entity.User;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,18 +27,18 @@ public class RestController {
     }
 
     @GetMapping("/getDoctors/{mainValue}")
-    public List<String> getDoctors(@PathVariable String mainValue){
+    public List<User> getDoctors(@PathVariable String mainValue){
 
-        List<Doctors> doctorsList = doctorsService.findAll();
-        List<String> users = new ArrayList<>();
+        System.out.println("work");
 
-        for (Doctors doctor:doctorsList) {
+        List<Doctors> doctorsList = doctorsService.findBySpecialty(mainValue);
+        List<User> users = new ArrayList<>();
 
-            if (doctor.getSpecialty().equals(mainValue)){
-                users.add(doctor.getUser().getName());
-            }
+        for (int i = 0; i < doctorsList.size(); i++) {
 
+            users.add(doctorsList.get(i).getUser());
         }
+
 
         return users;
 

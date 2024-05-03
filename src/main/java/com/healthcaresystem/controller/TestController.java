@@ -1,4 +1,4 @@
-package com.healthcaresystem;
+package com.healthcaresystem.controller;
 
 import com.healthcaresystem.entity.Doctors;
 import com.healthcaresystem.entity.Patient;
@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.print.Doc;
+import java.util.List;
 
 @Controller
 public class TestController {
@@ -56,6 +58,15 @@ public class TestController {
 
         User existingUser = userService.findByEmail(theUser.getEmail());
 
+        if(theUser.getEmail().equals("admin@medify.com")){
+
+            List<Doctors> doctorsList = doctorsService.findAll();
+
+            model.addAttribute("doctorList" , doctorsList);
+
+            return "redirect:/list";
+        }
+
 
         System.out.println(existingUser.getName());
 
@@ -70,6 +81,7 @@ public class TestController {
 
                 model.addAttribute("patient", existingUser );
                 model.addAttribute("patientHealth" , existingUser.getPatient().getHealthRecords());
+
                 return "patient";
             }else{
 
@@ -77,9 +89,7 @@ public class TestController {
                 return "Login";
 
             }
-
-        }
-        else {
+        }else  {
 
             model.addAttribute("error", "Invalid email or password.");
             return "Login";
@@ -87,9 +97,9 @@ public class TestController {
 
 
 
-    }
 
 
 
 
-}
+
+     }}
