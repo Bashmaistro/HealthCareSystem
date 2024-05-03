@@ -37,7 +37,7 @@
         }
 
         th {
-            background-color: #f2f2f2;
+        background-color: #f2f2f2;
         }
         .btn{
         background-color: #6495ED;
@@ -54,8 +54,8 @@
         <img th:src="@{/images/hero-bg.png}" src="../static/images/hero-bg.png" alt="">
     </div>
     <!-- header section strats -->
-    <div th:insert="/user_panel_navbar :: navbar" class="header_section">
-    </div>
+    <header class="header_section" th:insert="/user_panel_navbar :: navbar">
+    </header>
     <!-- end header section -->
 
         <div class="card mb-3 container" th:object="${patient}" th:method="get">
@@ -76,7 +76,7 @@
 
                         <div class="col-12 d-flex">
                         <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a th:href="@{'/appointment/' + ${patient.getUid()}}" class="btn text-light m-0 w-100">Take an Appointment</a></button>
-                        <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a th:href="#health-records" href="#health-records" class="btn text-light m-0 w-100">Health Records</a></button>
+                        <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a href="#health-records" class="btn text-light m-0 w-100">Health Records</a></button>
                         </div>
                         <div th:if="${success}" class="alert alert-success ">
                             <span th:text="${success}"></span>
