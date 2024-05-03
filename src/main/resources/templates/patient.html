@@ -39,6 +39,12 @@
         th {
             background-color: #f2f2f2;
         }
+        .btn{
+        background-color: #6495ED;
+        }
+        .btn:hover{
+        background-color: #4169E1;
+        }
     </style>
 </head>
 <body>
@@ -67,19 +73,21 @@
                         <p class="card-text" th:text=" 'Date of Birth:' + ' ' + *{patient.getUser().getDateOfBirth()}"><strong>Doğum Tarihi:</strong></p>
                         <p class="card-text" th:text=" 'Adress:' + ' ' + *{patient.getUser().getAddress()}"><strong>Adres:</strong></p>
                         <p class="card-text" th:text=" 'Contact Number' + ' ' + *{patient.getUser().getContactNumber()}"><strong>Contact Number:</strong> </p>
-                        <button type="button" class="btn btn-primary btn-lg btn-block"><a th:href="@{'/appointment/' + ${patient.getUid()}}" class="btn btn-success text-light">Take an Appointment</a></button>
 
-                        <div th:if="${success}" class="alert alert-success">
-                             <span th:text="${success}"></span>
+                        <div class="col-12 d-flex">
+                        <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a th:href="@{'/appointment/' + ${patient.getUid()}}" class="btn text-light m-0 w-100">Take an Appointment</a></button>
+                        <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a th:href="#health-records" href="#health-records" class="btn text-light m-0 w-100">Health Records</a></button>
                         </div>
-
+                        <div th:if="${success}" class="alert alert-success ">
+                            <span th:text="${success}"></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="health-record">
+    <div id="health-records" name="health-records" class="health-record">
         <h2 class="text-center">Health Records</h2>
         <table class="table table-striped table-hover">
             <thead>
