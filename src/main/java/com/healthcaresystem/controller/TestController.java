@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.print.Doc;
 import java.util.List;
@@ -45,6 +46,8 @@ public class TestController {
 
         User user = new User();
 
+
+
         theModel.addAttribute("user" , user);
 
         return "Login";
@@ -52,26 +55,41 @@ public class TestController {
     }
 
     @RequestMapping("/processUser")
-    public String processUser(@ModelAttribute("user")
-                              User theUser,
+    public String processUser(@ModelAttribute("user") User theUser,
+                              @RequestParam("username") String email,
+                              @RequestParam("password") String password,
                               Model model){
+
+        System.out.println(theUser.getEmail());
+
+        theUser.setPassword(password);
+        theUser.setEmail(email);
+
+        System.out.println(theUser.getEmail());
 
         User existingUser = userService.findByEmail(theUser.getEmail());
 
-        if(theUser.getEmail().equals("admin@medify.com")){
+        System.out.println(theUser.getPassword());
 
-            List<Doctors> doctorsList = doctorsService.findAll();
+        if (existingUser == null){
 
-            model.addAttribute("doctorList" , doctorsList);
-
-            return "redirect:/list";
+            model.addAttribute("error", "Invalid email or password.");
+            return "Login";
         }
 
 
-        System.out.println(existingUser.getName());
 
-        if (existingUser != null){
+        //check password
+        if (existingUser.getPassword().equals(theUser.getPassword())){
 
+            if(theUser.getEmail().equals("admin@medify.com") && theUser.getPassword().equals("admin123")){
+
+                List<Doctors> doctorsList = doctorsService.findAll();
+
+                model.addAttribute("doctorList" , doctorsList);
+
+                return "redirect:/list";
+            }
             Doctors existingDoctor = existingUser.getDoctors() ;
             Patient existingPatient = existingUser.getPatient();
 
@@ -83,23 +101,20 @@ public class TestController {
                 model.addAttribute("patientHealth" , existingUser.getPatient().getHealthRecords());
 
                 return "patient";
-            }else{
-
-                model.addAttribute("error", "User can't Found");
-                return "Login";
-
             }
-        }else  {
+
+
+
+
+
+        }else{
 
             model.addAttribute("error", "Invalid email or password.");
             return "Login";
+
         }
 
-
-
-
-
-
-
+        model.addAttribute("error", "Invalid email or password.");
+        return "Login";
 
      }}

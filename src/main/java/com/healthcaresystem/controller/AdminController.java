@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,10 +97,55 @@ public class AdminController {
 
         userService.save(user);
         user.setDoctors(doctors);
+        doctors.setUser(user);
         doctorsService.save(doctors);
 
 
         return "redirect:/list";
 
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("docId") int theId){
+
+        Doctors doctors = doctorsService.findById(theId);
+
+        doctorsService.deleteById(theId);
+
+        return "redirect:/list";
+    }
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("docId") int theID,
+                                    Model theModel){
+
+        Doctors doctors = doctorsService.findById(theID);
+        User user =doctors.getUser();
+        List<Gender> genders = new ArrayList<>();
+        genders.add(Gender.Male);
+        genders.add(Gender.Female);
+        genders.add(Gender.Other);
+
+        List<Degree> degree = new ArrayList<>();
+        degree.add(Degree.Ast_Dr);
+        degree.add(Degree.Dr);
+        degree.add(Degree.Fzt);
+        degree.add(Degree.Exp_Dr);
+        degree.add(Degree.Op_Dr);
+
+        theModel.addAttribute("degrees" , degree);
+
+
+        theModel.addAttribute("gender", genders);
+        theModel.addAttribute("doctor" , doctors);
+
+        theModel.addAttribute("user" , user);
+
+        return "doc-form";
+
+
+
+    }
+
+
 }

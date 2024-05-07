@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,15 +24,21 @@
           <h4>Login</h4>
         </div>
         <div class="card-body">
-          <form action="#" th:action="@{/processUser}" th:object="${user}" method="post">
+          <form  th:action="@{/processUser}" th:object="${user}" method="post" sec:form>
+            <div th:if="${param.error}" class="alert alert-danger">
+              <i >Invalid email or password!!</i>
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+              <i>You have been logged out</i>
+            </div>
             <div class="form-group">
               <input type="hidden" th:field="*{uid}"/>
               <label>Email</label>
-              <input type="text" th:field="*{email}" name="email" class="form-control" required>
+              <input type="text"  id="username" name="username" class="form-control" required>
             </div>
             <div class="form-group">
               <label>Password</label>
-              <input type="password" th:field="*{password}" name="password" class="form-control" required>
+              <input type="password"  id="password" name="password" class="form-control" required>
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -46,6 +52,7 @@
           <div th:if="${error}" class="alert alert-danger">
             <p th:text="${error}"></p>
           </div>
+
         </div>
       </div>
     </div>

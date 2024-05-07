@@ -25,6 +25,7 @@
             <th>Email</th>
             <th>Specialty</th>
             <th>Number</th>
+            <th>Password</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -36,6 +37,7 @@
             <td th:text="${tempdoc.user.email}"></td>
             <td th:text="${tempdoc.specialty}"></td>
             <td th:text="${tempdoc.user.contactNumber}"></td>
+            <td th:text="${tempdoc.user.password}"></td>
             <td>
                 <a th:href="@{/showFormForUpdate(docId=${tempdoc.did})}"
                    class="btn btn-info btn-sm">

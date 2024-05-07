@@ -192,19 +192,10 @@ public class User {
       }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public boolean isEnabled() {
+        boolean  enabled = true;
+        return enabled;
+    }
 
 
 }
