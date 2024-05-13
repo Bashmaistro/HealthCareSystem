@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import java.util.Optional;
 
 
 public interface UserService {
@@ -15,6 +15,7 @@ public interface UserService {
     List<User> findAll();
 
     User findById(int uid);
+
 
 
     User findByEmail(String email);

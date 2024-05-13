@@ -18,6 +18,10 @@ public class HealthRecordServiceImp implements HealthRecordService {
 
     private HealthRecordRepository healthRecordRepository;
 
+    public HealthRecordServiceImp(HealthRecordRepository healthRecordRepository) {
+        this.healthRecordRepository = healthRecordRepository;
+    }
+
     @Override
     public List<HealthRecord> findAll() {
         return healthRecordRepository.findAll();

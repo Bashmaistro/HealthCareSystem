@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<html xmlns:th="https://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,7 +75,7 @@
                         <p class="card-text" th:text=" 'Contact Number' + ' ' + *{patient.getUser().getContactNumber()}"><strong>Contact Number:</strong> </p>
 
                         <div class="col-12 d-flex">
-                        <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a th:href="@{'/appointment/' + ${patient.getUid()}}" class="btn text-light m-0 w-100">Take an Appointment</a></button>
+                        <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a th:href="@{/appointment/create}" class="btn text-light m-0 w-100">Take an Appointment</a></button>
                         <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a href="#health-records" class="btn text-light m-0 w-100">Health Records</a></button>
                         </div>
                         <div th:if="${success}" class="alert alert-success ">

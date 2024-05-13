@@ -15,7 +15,7 @@
     <hr>
 
     <p class="h4 mb-4">Save Doctor</p>
-    <form action="#" th:action="@{/save}"
+    <form action="#" th:action="@{/admin/save}"
           th:object="${user}" method="post">
         <input type="hidden" th:field="*{uid}"/>
 
@@ -47,7 +47,7 @@
 
     </form>
     <hr>
-    <a th:href="@{/list}" >
+    <a th:href="@{/admin/list}" >
         Back te Doctor List
     </a>
 

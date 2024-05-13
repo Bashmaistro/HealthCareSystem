@@ -1,16 +1,22 @@
 package com.healthcaresystem.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.healthcaresystem.enumarated.Gender;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements UserDetails {
 
 
     @Id
@@ -54,6 +60,12 @@ public class User {
     @JsonManagedReference
     private Doctors doctors;
 
+    @Transient
+    private Set<String> roles;
+
+    @Transient
+    private PasswordEncoder passwordEncoder;
+
 
     @Transient
     private int emailCode = 0;
@@ -90,13 +102,6 @@ public class User {
         this.surname = surname;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getEmail() {
         return email;
@@ -192,9 +197,53 @@ public class User {
       }
 
 
+
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
+        authorities.add(authority);
+
+
+        return authorities;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
     public boolean isEnabled() {
-        boolean  enabled = true;
-        return enabled;
+        return true;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 

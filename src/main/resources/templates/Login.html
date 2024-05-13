@@ -24,7 +24,7 @@
           <h4>Login</h4>
         </div>
         <div class="card-body">
-          <form  th:action="@{/processUser}" th:object="${user}" method="post" sec:form>
+          <form  th:action="@{/secProcessUser}" th:object="${user}" method="post" sec:form>
             <div th:if="${param.error}" class="alert alert-danger">
               <i >Invalid email or password!!</i>
             </div>

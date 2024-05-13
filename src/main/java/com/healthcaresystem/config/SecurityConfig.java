@@ -3,15 +3,21 @@ package com.healthcaresystem.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -19,44 +25,83 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig  {
 
-
+    @Autowired
+    private DataSource dataSource;
 
 
     @Bean
-    public UserDetailsManager userDetailsManager(DataSource dataSource){
-        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        String usersByUsernameQuery = "select email, password, true as enabled from users where email = ?";
+        String authsByUserQuery = "SELECT u.email, r.name FROM users u JOIN role r ON u.roleid = r.rid where email = ?";
 
+        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
 
-        jdbcUserDetailsManager.setUsersByUsernameQuery(
-                "SELECT email AS username,CONCAT('{noop}', password) AS password,true as enabled FROM users where email=?"
-        );
-
-        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
-                "SELECT u.email as username, r.name as authority FROM users u INNER JOIN role r ON u.roleid = r.rid where u.email =?;"
-        );
-
-        return jdbcUserDetailsManager;
+        userDetailsManager.setUsersByUsernameQuery(usersByUsernameQuery);
+        userDetailsManager.setAuthoritiesByUsernameQuery(authsByUserQuery);
+        return userDetailsManager;
     }
-
-
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity)  throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.authorizeHttpRequests(auth->auth.requestMatchers("/img/","/css/").permitAll());
 
-        httpSecurity.authorizeHttpRequests(configurer ->
-                configurer
+        http.authorizeHttpRequests(configure -> configure
+                        .requestMatchers("/resources/**").authenticated()
+                        .requestMatchers("/user_panel_navbar").permitAll()
+                        .requestMatchers("/doctor/**").hasAuthority("DOCTOR")
+                        .requestMatchers("/calender").hasAuthority("DOCTOR")
+                        .requestMatchers("/static/**").permitAll()
+                        .requestMatchers("/api/events").hasAuthority("DOCTOR")
+                        .requestMatchers("/doctor/getCalender").hasAuthority("DOCTOR")
+                          .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                          .requestMatchers("/patient").hasAuthority("PATIENT")
+
+
+//                        .requestMatchers("/").hasRole("student")
+//                        .requestMatchers("/list/").hasRole("president")
+//                        .requestMatchers("/system/").hasRole("admin")
                         .anyRequest().authenticated())
-                .formLogin(
-                        form -> form
+                .formLogin(form -> form.loginPage("/login")
+                        .loginProcessingUrl("/secProcessUser")
+                        .defaultSuccessUrl("/secProcessUser")
 
-                                .loginPage("/login")
-                                .loginProcessingUrl("http://localhost:8080/processUser")
-                                .permitAll()
-                )
-                .logout(logout -> logout.permitAll());
+                         .permitAll())
+                .logout( form ->form
+                .logoutUrl("/logout") // Oturum kapatma URL'si
+                .logoutSuccessUrl("/login?logout") // Başarılı oturum kapatma sonrası yönlendirilecek URL
+                .permitAll());;
+//                .exceptionHandling(handler -> handler.accessDeniedPage("/access-denied"));
+        http.csrf(AbstractHttpConfigurer::disable);
+        return http.build();}
 
 
-        return httpSecurity.build();
-
-
+        @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
-}
+
+
+    @Bean
+    public AuthenticationManager authManager(UserDetailsService detailsService){
+        DaoAuthenticationProvider daoProvider = new DaoAuthenticationProvider();
+        daoProvider.setUserDetailsService(detailsService);
+        daoProvider.setPasswordEncoder(passwordEncoder());
+        return new ProviderManager(daoProvider);
+    }}
+
+
+
+//    @Autowired
+//    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception{
+//       authenticationManagerBuilder.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+//
+//    }
+
+//    @Bean
+//    public AuthenticationProvider daoAuthenticationProvider() {
+//        DaoAuthenticationProvider provider =
+//                new DaoAuthenticationProvider();
+//        provider.setPasswordEncoder(passwordEncoder());
+//        provider.setUserDetailsService(this.userDetailService);
+//        return provider;
+//    }
+

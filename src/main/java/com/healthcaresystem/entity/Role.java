@@ -1,10 +1,11 @@
 package com.healthcaresystem.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "Role")
-public class Role {
+public class Role implements GrantedAuthority {
 
 
 
@@ -38,5 +39,10 @@ public class Role {
     }
 
     public Role() {
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 }

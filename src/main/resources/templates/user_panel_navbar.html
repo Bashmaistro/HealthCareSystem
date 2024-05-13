@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Medify</title>
@@ -39,19 +39,25 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Profile and Information <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" th:href="@{/secProcessUser}">Profile and Information <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html"> Admin Panel(Create Doctor)</a>
+                            <a class="nav-link" th:href="@{/admin/save}" sec:authorize="hasAuthority('ADMIN')"> Admin Panel(Create Doctor)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="departments.html">Appointments</a>
+                            <a class="nav-link" th:href="@{/doctor/getCalender}" sec:authorize="hasAuthority('DOCTOR')"> Calender</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="doctors.html"> Create a HealthRecord or view</a>
+                            <a class="nav-link" th:href="@{/appointment/create}" sec:authorize="hasAuthority('PATIENT')">Appointments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link box" th:action="@{/logout}" methods="Post">Logout</a>
+                            <a class="nav-link" th:href="@{/appointment/healthrecord}" sec:authorize="hasAuthority('PATIENT')"> Health Records</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/record/}" sec:authorize="hasAuthority('DOCTOR')"> Create a HealthRecord or view</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link box" th:href="@{/logout}" methods="Post">Logout</a>
                         </li>
                     </ul>
                 </div>

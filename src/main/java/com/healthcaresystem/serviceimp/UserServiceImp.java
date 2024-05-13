@@ -3,6 +3,8 @@ package com.healthcaresystem.serviceimp;
 import com.healthcaresystem.entity.User;
 import com.healthcaresystem.repository.UserRepository;
 import com.healthcaresystem.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,10 +12,16 @@ import java.util.Optional;
 @Service
 public class UserServiceImp implements UserService {
 
+
+
     private UserRepository userRepository;
 
-    public UserServiceImp(UserRepository userRepository) {
+
+    private PasswordEncoder passwordEncoder;
+
+    public UserServiceImp(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -36,6 +44,8 @@ public class UserServiceImp implements UserService {
         return theUser;
     }
 
+
+
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -44,6 +54,11 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User save(User theUser) {
+
+        String temp = theUser.getPassword();
+
+        theUser.setPassword(passwordEncoder.encode(temp));
+
         return userRepository.save(theUser);
     }
 

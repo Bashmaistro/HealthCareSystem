@@ -7,11 +7,13 @@ import com.healthcaresystem.entity.Patient;
 import com.healthcaresystem.entity.User;
 import com.healthcaresystem.enumarated.Status;
 import com.healthcaresystem.service.*;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.Principal;
 import java.util.*;
 
 @Controller
@@ -38,8 +40,8 @@ public class AppointmentController {
     }
 
 
-    @GetMapping("/{Uid}")
-    public String takeAppointment(@PathVariable int Uid, Model theModel,
+    @GetMapping("/create")
+    public String takeAppointment(Principal principal, Model theModel,
                                   jakarta.servlet.http.HttpSession  session
                                   ){
 
@@ -48,7 +50,7 @@ public class AppointmentController {
 
 
 
-        User user = userService.findById(Uid);
+        User user = userService.findByEmail(principal.getName());
 
 
 
@@ -105,6 +107,20 @@ public class AppointmentController {
         return "patient";
 
 
+    }
+
+    @GetMapping("/healthrecord")
+    public String getHealthrecord(Principal principal, Model model){
+
+        User user = userService.findByEmail(principal.getName());
+
+        model.addAttribute("user" , user);
+        model.addAttribute("health", user.getPatient().getHealthRecords());
+
+
+
+
+        return "HealthRecords";
     }
 
 

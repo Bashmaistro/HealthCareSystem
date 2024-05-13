@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Information & Health Records</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .user-info {
+            background-color: #28a745;
+            padding: 40px;
+            color: white;
+        }
+        .health-record {
+            background-color: #fff;
+            padding: 40px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<header class="header_section" th:insert="/user_panel_navbar :: navbar"></header>
+<div  class="container main-content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="user-info" th:object="${user}">
+                <h2>User Information</h2>
+                <!-- User bilgileri buraya gelecek -->
+                <p th:text="*{name}" >Name: </p>
+                <p th:text="*{email}">Email: </p>
+                <p th:text="*{contactNumber}">Phone: </p>
+                <p th:text="*{address}">Address: </p>
+                <p th:text="*{dateOfBirth}">Date of Birth: </p>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="health-record">
+                <h2>Health Records</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Doctor's Name</th>
+                        <th scope="col">Prescription</th>
+                        <th scope="col">Record Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${tempH != null}" th:each="tempH : ${health}">
+                        <td th:text="${tempH.getDoctor().getUser().getName() + ' ' + tempH.getDoctor().getUser().getSurname()}"></td>
+                        <td th:text="${tempH.getPrescription()}"></td>
+                        <td th:text="${tempH.getRecordDate()}"></td>
+
+                    </tr>
+                    <!-- Buraya başka sağlık kayıtları ekleyebilirsiniz -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
