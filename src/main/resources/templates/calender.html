@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -582,6 +582,16 @@
     }</style>
 </head>
 <body>
+<div class="hero_area">
+
+    <div class="hero_bg_box">
+        <img th:src="@{/images/hero-bg.png}" src="../static/images/hero-bg.png" alt="">
+    </div>
+    <!-- header section strats -->
+    <header th:insert="/user_panel_navbar :: navbar" class="header_section">
+    </header>
+
+
 <div class="container">
     <div class="left">
         <div class="calendar">
@@ -650,7 +660,7 @@
 </div>
 
 
-
+</div>
 <script >const calendar = document.querySelector(".calendar"),
     date = document.querySelector(".date"),
     daysContainer = document.querySelector(".days"),

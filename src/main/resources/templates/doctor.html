@@ -5,27 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doktor Sayfası</title>
+    <link th:href="@{/css/style.css}" href="../static/css/style.css"  rel="stylesheet" />
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<header class="header_section" th:insert="/user_panel_navbar :: navbar"></header>
+<div class="hero_area">
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <img src="doctor.jpg" th:object="${doctor}" class="card-img-top" alt="Doktor Resmi">
+    <div class="hero_bg_box">
+        <img th:src="@{/images/hero-bg.png}" src="../static/images/hero-bg.png" alt="">
+    </div>
+    <!-- header section strats -->
+    <header th:insert="/user_panel_navbar :: navbar" class="header_section">
+    </header>
+
+    <div class="card mb-3 container" th:object="${doctor}" th:method="get"  alt="Doktor Resmi">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img th:src="@{/images/default_p.jpg}"  src="../static/images/default_p.jpg" class="card-img" alt="dp">
+            </div>
+            <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="*{doctor.name}"> </h5>
-                    <p class="card-text" th:text="*{doctor.doctors.specialty}">Speciality:</p>
-                    <p class="card-text" th:text="*{doctor.doctors.degree}">Degree: </p>
-                    <p class="card-text" th:text="*{doctor.contactNumber}">Telefon:</p>
-                    <p class="card-text" th:text="*{doctor.email}">E-posta:</p>
+                    <h5 class="card-title border-bottom thick">Your Information</h5>
+                    <p class="card-text"th:text="*{doctor.name}">
+                        <strong>Name-Surname:</strong></p>
+                    <p class="card-text" th:text=" 'Gender:' + ' ' + *{doctor.getUser().getGender()}">
+                        <strong>Gender:</strong></p>
+                    <p class="card-text" th:text="*{doctor.doctors.specialty}">
+                        <strong>Speciality:</strong></p>
+                    <p class="card-text" th:text="*{doctor.doctors.degree}">
+                        <strong>Degree:</strong></p>
+                    <p class="card-text" th:text=" 'Date of Birth:' + ' ' + *{doctor.getUser().getDateOfBirth()}"><strong>Doğum Tarihi:</strong></p>
+                    <p class="card-text" th:text=" 'Adress:' + ' ' + *{patient.getUser().getAddress()}"><strong>Adres:</strong></p>
+                    <p class="card-text" th:text="*{doctor.contactNumber}"><strong>Contact Number:</strong> </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
