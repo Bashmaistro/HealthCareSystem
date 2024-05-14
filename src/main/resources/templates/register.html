@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration Page</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link th:href="@{/css/style.css}" href="../static/css/style.css"  rel="stylesheet" />
+  <!-- responsive style -->
+  <link th:href="@{/css/responsive.css}" href="../static/css/responsive.css" rel="stylesheet" />
+
+  <link rel="stylesheet" th:href="@{/css/bootstrap.css}" type="text/css" href="../static/css/bootstrap.css" />
   <style>
     /* Custom CSS */
     body {
@@ -20,6 +23,40 @@
       background-color: #28a745; /* Yeşil buton */
       border-color: #28a745;
     }
+            .container {
+            border: 1px solid #ccc;
+            padding: 1em;
+            margin: auto!important;
+            width: 90%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .health-record {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+        background-color:#f2f2f2;
+        }
+    .float-left{
+    float:left!important;;
+
+    }
   </style>
 </head>
 <body>
@@ -32,67 +69,76 @@
   <header th:insert="/user_panel_navbar :: navbar" class="header_section">
   </header>
 
-<div class="container mt-5">
+<div class="container card mb-3 mt-5 col-7">
   <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <h4>Registration</h4>
+        <div class="col-12">
+          <h3 class="text-center">Registration</h3>
         </div>
         <div class="card-body">
           <form th:action="@{/emailCheck}" th:object="${user}"  method="post">
-            <div class="form-group">
+            <input type="hidden" th:field="*{uid}" id="uid" name="uid" class="form-control" >
+            <div class="row col-12 m-2">
+            <div class="form-group m-auto col-6">
               <label for="name">Name</label>
               <input th:field="*{name}" type="text" id="name" name="name" class="form-control" required>
               <input th:field="*{uid}" type="hidden" id="q" name="q" class="form-control" >
             </div>
-            <div class="form-group">
+            <div class="form-group m-auto col-6">
               <label for="surname">Surname</label>
               <input th:field="*{surname}" type="text" id="surname" name="surname" class="form-control" required>
             </div>
-            <div class="form-group">
-              <label for="dob">Date of Birth</label>
-              <input th:field="*{dateOfBirth}" type="date" id="dob" name="dob" class="form-control" required
-                     min="1900-01-01" max="2006-01-01"> <!-- Min 18 yaş -->
             </div>
-            <div class="form-group">
-              <label for="phone">Telephone Number</label>
-              <input th:field="*{contactNumber}" type="tel" id="phone" name="phone" class="form-control"
-                     pattern="[0-9]{11}" placeholder="Enter 11-digit phone number" required>
-              <small class="form-text text-muted">Please enter an 11-digit phone number.</small>
-            </div>
-            <div class="form-group">
-              <label for="gender">Gender</label>
-              <select th:field="*{gender}" id="gender" name="gender" class="form-control" required>
-                <option th:each="tempGender : ${genders}" th:value="${tempGender}" th:text="${tempGender}"></option>
 
-              </select>
+            <div class="row col-12 m-2">
+              <div  class="form-group m-auto col-6">
+                <label for="email">Email</label>
+                <input th:field="*{email}" type="email" id="email" name="email" class="form-control" required>
+              </div>
+              <div class="form-group m-auto col-6">
+                <label for="password">Password</label>
+                <input th:field="*{password}" type="password" id="password" name="password" class="form-control" required>
+              </div>
             </div>
-            <input type="hidden" th:field="*{uid}" id="uid" name="uid" class="form-control" >
 
-            <div class="form-group">
+            <div class="row col-12 m-2">
+              <div class="form-group m-auto col-6">
+                <label for="dob">Date of Birth</label>
+                <input th:field="*{dateOfBirth}" type="date" id="dob" name="dob" class="form-control" required
+                       min="1900-01-01" max="2006-01-01"> <!-- Min 18 yaş -->
+              </div>
+              <div class="form-group m-auto col-6">
+                <label for="phone">Telephone Number</label>
+                <input th:field="*{contactNumber}" type="tel" id="phone" name="phone" class="form-control"
+                       pattern="[0-9]{11}" placeholder="Enter 11-digit phone number" required>
+                <small class="form-text text-muted">Please enter an 11-digit phone number.</small>
+              </div>
+            </div>
 
-              <label for="address">Address</label>
-              <input type="text" th:field="*{address}" id="address" name="address" class="form-control" required>
+            <div class="row col-12 m-2">
+              <div class="form-group m-auto col-6">
+                <label for="gender">Gender</label>
+                <select th:field="*{gender}" id="gender" name="gender" class="form-control" required>
+                  <option th:each="tempGender : ${genders}" th:value="${tempGender}" th:text="${tempGender}"></option>
+
+                </select>
+              </div>
+              <div class="form-group m-auto col-6">
+
+                <label for="address">Address</label>
+                <input type="text" th:field="*{address}" id="address" name="address" class="form-control" required>
+              </div>
             </div>
-            <div  class="form-group">
-              <label for="email">Email</label>
-              <input th:field="*{email}" type="email" id="email" name="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input th:field="*{password}" type="password" id="password" name="password" class="form-control" required>
-            </div>
+
+            <div class="row col-12 m-2">
             <div class="form-group">
               <button type="submit" class="btn btn-success btn-block register-btn">Register</button>
             </div>
             <div th:if="${error}" class="alert alert-danger">
               <p th:text="${error}"></p>
             </div>
+            </div>
           </form>
         </div>
-      </div>
-    </div>
   </div>
 </div>
 

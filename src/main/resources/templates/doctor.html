@@ -68,16 +68,34 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title border-bottom thick">Your Information</h5>
-                    <p class="card-text"th:text=" 'Name and Surname: ' + *{doctors.degree} + ' ' + *{name} + ' ' + *{surname} ">
-                        <strong>Name-Surname:</strong></p>
-                    <p class="card-text" th:text=" 'Gender:' + ' ' + *{gender}">
-                        <strong>Gender:</strong></p>
-                    <p class="card-text" th:text=" 'Speciality:' + ' ' + *{doctors.specialty}">
-                        <strong>Speciality:</strong></p>
-                    <p class="card-text" th:text=" 'Date of Birth:' + ' ' + *{dateOfBirth}"><strong>Doğum Tarihi:</strong></p>
-                    <p class="card-text" th:text=" 'Adress:' + ' ' + *{address}"><strong>Adres:</strong></p>
-                    <p class="card-text" th:text=" 'Contact Number' + ' ' + *{contactNumber}"><strong>Contact Number:</strong> </p>
-
+                    <div class="row">
+                    <p><strong>Name-Surname:</strong></p>
+                    <p class="card-text" th:text=" *{doctors.degree} + ' ' + *{name} + ' ' + *{surname} "> </p>
+                    </div>
+                    <div class="row">
+                        <p><strong>Gender:</strong></p>
+                        <p class="card-text" th:text=" ' ' + *{gender}"> </p>
+                    </div>
+                    <div class="row">
+                        <p><strong>Speciality:</strong></p>
+                        <p class="card-text" th:text=" ' ' + *{doctors.specialty}"> </p>
+                    </div>
+                    <div class="row">
+                        <p><strong>Date of Birth:</strong></p>
+                        <p class="card-text" th:text="' ' + *{dateOfBirth} "> </p>
+                    </div>
+                    <div class="row">
+                        <p><strong>Name Surname:</strong></p>
+                        <p class="card-text" th:text=" *{doctors.degree} + ' ' + *{name} + ' ' + *{surname} "> </p>
+                    </div>
+                    <div class="row">
+                        <p><strong>Adress:</strong></p>
+                        <p class="card-text" th:text="' ' + *{address} "> </p>
+                    </div>
+                    <div class="row">
+                        <p><strong>Contact Number:</strong></p>
+                        <p class="card-text" th:text=" ' ' + *{contactNumber} "> </p>
+                    </div>
                     <div class="col-12 d-flex">
                         <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a th:href="@{/record/add}" class="btn text-light m-0 w-100">Create a health records</a></button>
                         <button type="button" class="btn btn-success btn btn-block col-6 float-left m-1 p-0"><a href="/doctor/getCalender" class="btn text-light m-0 w-100">Calender</a></button>
