@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<html xmlns:th="https://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"lang="en">
+<html xmlns:th="https://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +26,7 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title border-bottom thick">Your Information</h5>
+<<<<<<< Updated upstream
                     <p class="card-text"th:text="*{name}">
                         <strong>Name-Surname:</strong></p>
                     <p class="card-text" th:text=" 'Gender:' + ' ' + *{gender}">
@@ -37,6 +38,17 @@
                     <p class="card-text" th:text=" 'Date of Birth:' + ' ' + *{dateOfBirth}"><strong>Doğum Tarihi:</strong></p>
                     <p class="card-text" th:text=" 'Adress:' + ' ' + *{address}"><strong>Adres:</strong></p>
                     <p class="card-text" th:text="*{contactNumber}"><strong>Contact Number:</strong> </p>
+=======
+                    <p class="card-text"th:text="'Name:' + ' ' + *{doctors.degree} +' '+*{name}">
+                        <strong>Name-Surname:</strong></p>
+                    <p class="card-text" th:text=" 'Gender:' + ' ' + *{gender}">
+                        <strong>Gender:</strong></p>
+                    <p class="card-text" th:text="'Specialty:' + ' ' + *{doctors.specialty}">
+                        <strong>Speciality:</strong></p>
+                    <p class="card-text" th:text=" 'Date of Birth:' + ' ' + *{dateOfBirth}"><strong>Doğum Tarihi:</strong></p>
+                    <p class="card-text" th:text=" 'Adress:' + ' ' + *{address}"><strong>Adres:</strong></p>
+                    <p class="card-text" th:text="'Contact Number:' + ' ' + *{contactNumber}"><strong>Contact Number:</strong> </p>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
