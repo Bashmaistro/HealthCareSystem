@@ -26,17 +26,17 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title border-bottom thick">Your Information</h5>
-                    <p class="card-text"th:text="*{doctor.name}">
+                    <p class="card-text"th:text="*{name}">
                         <strong>Name-Surname:</strong></p>
-                    <p class="card-text" th:text=" 'Gender:' + ' ' + *{doctor.getUser().getGender()}">
+                    <p class="card-text" th:text=" 'Gender:' + ' ' + *{gender}">
                         <strong>Gender:</strong></p>
-                    <p class="card-text" th:text="*{doctor.doctors.specialty}">
+                    <p class="card-text" th:text="*{doctors.specialty}">
                         <strong>Speciality:</strong></p>
-                    <p class="card-text" th:text="*{doctor.doctors.degree}">
+                    <p class="card-text" th:text="*{doctors.degree}">
                         <strong>Degree:</strong></p>
-                    <p class="card-text" th:text=" 'Date of Birth:' + ' ' + *{doctor.getUser().getDateOfBirth()}"><strong>Doğum Tarihi:</strong></p>
-                    <p class="card-text" th:text=" 'Adress:' + ' ' + *{patient.getUser().getAddress()}"><strong>Adres:</strong></p>
-                    <p class="card-text" th:text="*{doctor.contactNumber}"><strong>Contact Number:</strong> </p>
+                    <p class="card-text" th:text=" 'Date of Birth:' + ' ' + *{dateOfBirth}"><strong>Doğum Tarihi:</strong></p>
+                    <p class="card-text" th:text=" 'Adress:' + ' ' + *{address}"><strong>Adres:</strong></p>
+                    <p class="card-text" th:text="*{contactNumber}"><strong>Contact Number:</strong> </p>
                 </div>
             </div>
         </div>

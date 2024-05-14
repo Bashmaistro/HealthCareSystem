@@ -42,14 +42,23 @@ public class SecurityConfig  {
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth->auth.requestMatchers("/img/","/css/").permitAll());
+
+        String[] staticResources  =  {
+                "/css/**",
+                "/images/**",
+                "/fonts/**",
+                "/scripts/**",
+        };
+
+        http.authorizeHttpRequests(auth->auth.requestMatchers("/img/**","/css/**").permitAll());
 
         http.authorizeHttpRequests(configure -> configure
-                        .requestMatchers("/resources/**").authenticated()
+
+                        .requestMatchers(staticResources).permitAll()
                         .requestMatchers("/user_panel_navbar").permitAll()
                         .requestMatchers("/doctor/**").hasAuthority("DOCTOR")
                         .requestMatchers("/calender").hasAuthority("DOCTOR")
-                        .requestMatchers("/static/**").permitAll()
+
                         .requestMatchers("/api/events").hasAuthority("DOCTOR")
                         .requestMatchers("/doctor/getCalender").hasAuthority("DOCTOR")
                           .requestMatchers("/admin/**").hasAuthority("ADMIN")
@@ -74,7 +83,7 @@ public class SecurityConfig  {
         return http.build();}
 
 
-        @Bean
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
