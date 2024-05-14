@@ -72,7 +72,6 @@ public class SecurityConfig  {
                 .formLogin(form -> form.loginPage("/login")
                         .loginProcessingUrl("/secProcessUser")
                         .defaultSuccessUrl("/secProcessUser")
-
                          .permitAll())
                 .logout( form ->form
                 .logoutUrl("/logout") // Oturum kapatma URL'si
