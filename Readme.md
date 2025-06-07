@@ -1,36 +1,95 @@
-PROJECT NAME: Medify
+# HealthCareSystem
 
-Vision Statement: To implement healthcare delivery through a user-friendly hospital
-information management system which is straightforward and accessible for even old
-aged patients, makes an optimal scheduling of doctors, and with role based security ,the
-system fosters a collaborative environment for optimal patient care.
-Functional Requirements:
-1. User Management:
-a. Register and manage different user roles(patient, doctor, admin) with
-secure login.
-b. Implement role-based access control to restrict access specific areas and
-information
-2. Patient Management:
-a. Allow patients to register, update personal information, view health
-records and prescriptions.
-b. Enable patients to search for doctors by specialty and availability.
-c. Facilitate online appointment booking with doctors within available slots.
-d. Provide a secure platform for patients to access and view their health
-records from just their doctors.
-3. Doctor Management:
-a. Allow doctors to manage their profiles and update availability.
-b. Provide a clear view of their appointment schedules.
-c. Enable doctors to access and review patient health records for scheduled
-appointments.
-d. Allow doctors to add notes and update patient’s health records after
-consultations.
-4. Appointment Management:
-a. Offer a user-friendly interface for appointment booking and cancellation
-by both patients and doctors.
-b. Manage appointment scheduling to avoid conflicts and ensure efficient use
-of doctor time.
-5. Optional (Can be added later)
-a. Secure messaging: Facilitate secure communication between doctors and
-patients for post-consultation questions or follow-ups.
-b. Lab integration: Integrate with lab systems to allow doctors to view test
-results directly within the platform.
+HealthCareSystem, temel sağlık hizmetleri yönetimini simüle eden, Java tabanlı, konsol uygulaması olarak tasarlanmış bir projedir. Bu sistem; hastalar, doktorlar ve randevular gibi temel bileşenlerin yönetimini sağlar ve dosya tabanlı veri saklama kullanır.
+
+## 📌 Amaç
+
+Bu proje, nesne yönelimli programlama prensiplerini uygulamak, gerçek dünya problemlerini yazılım mimarisiyle modellemek ve dosya tabanlı veri yönetimini öğretmek amacıyla geliştirilmiştir.
+
+---
+
+## ⚙️ Özellikler
+
+- ✅ Doktor kaydı ekleme, silme, listeleme
+- ✅ Hasta kaydı ekleme, silme, listeleme
+- ✅ Randevu oluşturma, iptal etme ve geçmiş randevuları görüntüleme
+- ✅ Verilerin dosya sistemi üzerinden kalıcı olarak saklanması (Serialization)
+- ✅ Konsol üzerinden kullanıcı ile etkileşim
+
+---
+
+## 🛠️ Kullanılan Teknolojiler
+
+- Java 17+
+- OOP (Nesne Yönelimli Programlama)
+- File I/O & Object Serialization
+- Temel Katmanlı Mimari
+
+---
+
+## 📁 Proje Yapısı
+
+```
+HealthCareSystem/
+├── data/                   # Veritabanı yerine kullanılan veri yönetimi sınıfları
+│   └── DataManager.java
+│
+├── entities/               # Temel varlık sınıfları
+│   ├── Doctor.java
+│   ├── Patient.java
+│   └── Appointment.java
+│
+├── services/               # İş kurallarını içeren servis sınıfları
+│   ├── DoctorService.java
+│   ├── PatientService.java
+│   └── AppointmentService.java
+│
+├── Main.java               # Uygulamanın giriş noktası
+└── README.md               # Proje açıklaması
+```
+
+---
+
+## 🚀 Kurulum
+
+1. Projeyi indir:
+```
+https://github.com/Bashmaistro/HealthCareSystem/archive/refs/heads/master.zip
+```
+veya terminal üzerinden:
+
+```bash
+git clone https://github.com/Bashmaistro/HealthCareSystem.git
+```
+
+2. Java destekli bir IDE ile (IntelliJ IDEA, Eclipse vb.) projeyi aç.
+
+3. `Main.java` dosyasını çalıştırarak uygulamayı başlat.
+
+---
+
+## 💡 Kullanım Senaryoları
+
+- Yeni bir hasta eklemek için `PatientService.addPatient(...)` metodu kullanılabilir.
+- Randevu almak için `AppointmentService.scheduleAppointment(...)` çağrılır.
+- Program kapatıldığında tüm veriler `data/` klasöründeki dosyalara otomatik olarak yazılır.
+
+---
+
+## 🔐 Veri Saklama
+
+Veriler Java'nın `ObjectOutputStream` ve `ObjectInputStream` sınıflarıyla `.ser` dosyalarına yazılır ve oradan okunur. Bu sayede, uygulama kapandığında bilgiler kaybolmaz.
+
+---
+
+## 👤 Geliştirici
+
+**Emirhan Yıldız**  
+GitHub: [@Bashmaistro](https://github.com/Bashmaistro)  
+LinkedIn: [linkedin.com/in/emirhanyildz](https://linkedin.com/in/emirhanyildz)
+
+---
+
+## 📄 Lisans
+
+Bu proje MIT lisansı ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına göz atabilirsiniz.
